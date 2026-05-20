@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tessera Settings</title>
+  <link rel="stylesheet" href="settings.css">
+</head>
+<body>
+  <div id="settings-container">
+    <aside id="sidebar">
+      <div id="sidebar-header">
+        <div id="traffic-spacer"></div>
+        <h2>Settings</h2>
+      </div>
+      <nav>
+        <button class="nav-item active" data-section="general">General</button>
+        <button class="nav-item" data-section="navigation">Navigation</button>
+        <button class="nav-item" data-section="auth">Authentication</button>
+        <button class="nav-item" data-section="links">External Links</button>
+        <button class="nav-item" data-section="layout">Layout &amp; Panes</button>
+        <button class="nav-item" data-section="shortcuts">Shortcuts</button>
+        <button class="nav-item" data-section="privacy">Privacy &amp; Data</button>
+        <button class="nav-item" data-section="notifications">Notifications</button>
+        <button class="nav-item" data-section="advanced">Advanced</button>
+        <button class="nav-item" data-section="profiles">Profiles</button>
+      </nav>
+      <div id="sidebar-footer">
+        <button id="btn-export">Export</button>
+        <button id="btn-import">Import</button>
+        <button id="btn-reset">Reset All</button>
+      </div>
+    </aside>
+    <main id="content">
+      <!-- General -->
+      <section id="sec-general" class="section active">
+        <h3>General</h3>
+        <div class="field">
+          <label for="general-appName">App Name</label>
+          <input type="text" id="general-appName" data-key="general.appName" />
+        </div>
+        <div class="field">
+          <label for="general-defaultUrl">Default URL</label>
+          <input type="url" id="general-defaultUrl" data-key="general.defaultUrl" placeholder="https://example.com" />
+          <p class="hint">URL loaded when a new pane opens.</p>
+        </div>
+        <div class="field">
+          <label for="general-theme">Theme</label>
+          <select id="general-theme" data-key="general.theme">
+            <option value="system">System (Auto)</option>
+            <option value="light">Light</option>
+            <option value="dark">Dark</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="general-accentColor">Accent Color</label>
+          <input type="color" id="general-accentColor" data-key="general.accentColor" />
+        </div>
+        <div class="field">
+          <label for="general-startBehavior">Start Behavior</label>
+          <select id="general-startBehavior" data-key="general.startBehavior">
+            <option value="single">Single pane</option>
+            <option value="restore">Restore last session</option>
+            <option value="custom">Custom pane count</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="general-launchAtLogin">
+            <input type="checkbox" id="general-launchAtLogin" data-key="general.launchAtLogin" />
+            Launch at login
+          </label>
+        </div>
+      </section>
+
+      <!-- Navigation -->
+      <section id="sec-navigation" class="section">
+        <h3>Navigation</h3>
+        <div class="field">
+          <label for="navigation-showUrlBar">
+            <input type="checkbox" id="navigation-showUrlBar" data-key="navigation.showUrlBar" />
+            Show URL bar in each pane
+          </label>
+          <p class="hint">When enabled, each pane has an editable address bar.</p>
+        </div>
+        <div class="field">
+          <label for="navigation-allowNavigationAway">
+            <input type="checkbox" id="navigation-allowNavigationAway" data-key="navigation.allowNavigationAway" />
+            Allow navigation away from default domain
+          </label>
+          <p class="hint">When disabled, panes are locked to the default URL's domain.</p>
+        </div>
+        <div class="field">
+          <label for="navigation-showHomepageButton">
+            <input type="checkbox" id="navigation-showHomepageButton" data-key="navigation.showHomepageButton" />
+            Show homepage button
+          </label>
+        </div>
+      </section>
+
+      <!-- Authentication -->
+      <section id="sec-auth" class="section">
+        <h3>Authentication / SSO</h3>
+        <div class="field">
+          <label for="auth-inAppDomains">In-App Domains (stay in app)</label>
+          <textarea id="auth-inAppDomains" data-key="auth.inAppDomains" rows="4" placeholder="*.company.com&#10;login.example.com&#10;sso.provider.com"></textarea>
+          <p class="hint">One domain per line. Supports wildcards (*.example.com). These domains will load inside the app instead of opening in your browser. Leave empty to keep all navigation in-app.</p>
+        </div>
+        <div class="field">
+          <label for="auth-externalDomains">External Domains (always open in browser)</label>
+          <textarea id="auth-externalDomains" data-key="auth.externalDomains" rows="3" placeholder="docs.google.com&#10;github.com"></textarea>
+          <p class="hint">One domain per line. These will always open in your system browser, even if they match the in-app list.</p>
+        </div>
+        <div class="field">
+          <label for="auth-authPathKeywords">Auth Path Keywords</label>
+          <textarea id="auth-authPathKeywords" data-key="auth.authPathKeywords" rows="3" placeholder="oauth, login, sso, callback"></textarea>
+          <p class="hint">Comma-separated. URLs containing these keywords in their path will stay in-app (for SSO flows).</p>
+        </div>
+        <div class="field">
+          <label for="auth-cookiePartition">Cookie Partition Name</label>
+          <input type="text" id="auth-cookiePartition" data-key="auth.cookiePartition" />
+          <p class="hint">Shared session name across panes. Change to isolate sessions between profiles.</p>
+        </div>
+        <div class="field">
+          <label for="auth-clearCookiesOnQuit">
+            <input type="checkbox" id="auth-clearCookiesOnQuit" data-key="auth.clearCookiesOnQuit" />
+            Clear cookies on quit
+          </label>
+        </div>
+      </section>
+
+      <!-- External Links -->
+      <section id="sec-links" class="section">
+        <h3>External Link Behavior</h3>
+        <div class="field">
+          <label for="links-defaultAction">Default action for external links</label>
+          <select id="links-defaultAction" data-key="links.defaultAction">
+            <option value="browser">Open in system browser</option>
+            <option value="new-pane">Open in new pane</option>
+            <option value="ask">Ask every time</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="links-modifierKeys">
+            <input type="checkbox" id="links-modifierKeys" data-key="links.modifierKeys" />
+            Enable modifier key overrides
+          </label>
+          <p class="hint">Cmd+click = force browser, Opt+click = force new pane.</p>
+        </div>
+        <div class="field">
+          <label for="links-popupHandling">Popup handling</label>
+          <select id="links-popupHandling" data-key="links.popupHandling">
+            <option value="allow-allowlisted">Allow for in-app domains</option>
+            <option value="allow-all">Allow all popups</option>
+            <option value="block-all">Block all popups</option>
+          </select>
+        </div>
+      </section>
+
+      <!-- Layout -->
+      <section id="sec-layout" class="section">
+        <h3>Layout &amp; Panes</h3>
+        <div class="field">
+          <label for="layout-defaultLayout">Default layout on start</label>
+          <select id="layout-defaultLayout" data-key="layout.defaultLayout">
+            <option value="single">Single pane</option>
+            <option value="2-vertical">2 panes side-by-side</option>
+            <option value="2-horizontal">2 panes stacked</option>
+            <option value="2x2">2×2 grid</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="layout-maxPanes">Max panes (0 = unlimited)</label>
+          <input type="number" id="layout-maxPanes" data-key="layout.maxPanes" min="0" max="50" />
+        </div>
+        <div class="field">
+          <label for="layout-paneHeaderVisibility">Pane header visibility</label>
+          <select id="layout-paneHeaderVisibility" data-key="layout.paneHeaderVisibility">
+            <option value="always">Always show</option>
+            <option value="hover">Show on hover</option>
+            <option value="hidden">Hidden</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="layout-resizerThickness">Resizer thickness</label>
+          <select id="layout-resizerThickness" data-key="layout.resizerThickness">
+            <option value="thin">Thin (2px)</option>
+            <option value="normal">Normal (4px)</option>
+            <option value="thick">Thick (8px)</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="layout-newPanePosition">New pane position</label>
+          <select id="layout-newPanePosition" data-key="layout.newPanePosition">
+            <option value="right">Right of active</option>
+            <option value="below">Below active</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="layout-tabMode">
+            <input type="checkbox" id="layout-tabMode" data-key="layout.tabMode" />
+            Enable tab bar (in addition to split panes)
+          </label>
+        </div>
+      </section>
+
+      <!-- Shortcuts -->
+      <section id="sec-shortcuts" class="section">
+        <h3>Shortcuts</h3>
+        <p class="hint" style="margin-bottom:12px;">Click a shortcut field and press your desired key combination to record it.</p>
+        <div class="field">
+          <label for="shortcuts-globalToggle">Global summon/hide hotkey</label>
+          <input type="text" id="shortcuts-globalToggle" data-key="shortcuts.globalToggle" class="shortcut-input" readonly />
+        </div>
+        <div class="field">
+          <label for="shortcuts-newPane">New pane</label>
+          <input type="text" id="shortcuts-newPane" data-key="shortcuts.newPane" class="shortcut-input" readonly />
+        </div>
+        <div class="field">
+          <label for="shortcuts-closePane">Close pane</label>
+          <input type="text" id="shortcuts-closePane" data-key="shortcuts.closePane" class="shortcut-input" readonly />
+        </div>
+        <div class="field">
+          <label for="shortcuts-splitVertical">Split vertical</label>
+          <input type="text" id="shortcuts-splitVertical" data-key="shortcuts.splitVertical" class="shortcut-input" readonly />
+        </div>
+        <div class="field">
+          <label for="shortcuts-splitHorizontal">Split horizontal</label>
+          <input type="text" id="shortcuts-splitHorizontal" data-key="shortcuts.splitHorizontal" class="shortcut-input" readonly />
+        </div>
+        <div class="field">
+          <label for="shortcuts-reloadPane">Reload pane</label>
+          <input type="text" id="shortcuts-reloadPane" data-key="shortcuts.reloadPane" class="shortcut-input" readonly />
+        </div>
+        <div class="field">
+          <label for="shortcuts-toggleDevTools">Toggle DevTools</label>
+          <input type="text" id="shortcuts-toggleDevTools" data-key="shortcuts.toggleDevTools" class="shortcut-input" readonly />
+        </div>
+        <div class="field">
+          <label for="shortcuts-openSettings">Open settings</label>
+          <input type="text" id="shortcuts-openSettings" data-key="shortcuts.openSettings" class="shortcut-input" readonly />
+        </div>
+      </section>
+
+      <!-- Privacy -->
+      <section id="sec-privacy" class="section">
+        <h3>Privacy &amp; Data</h3>
+        <div class="field">
+          <label for="privacy-userAgent">Custom User Agent</label>
+          <input type="text" id="privacy-userAgent" data-key="privacy.userAgent" placeholder="Leave empty for default Chrome UA" />
+        </div>
+        <div class="field">
+          <label for="privacy-proxy">Proxy</label>
+          <input type="text" id="privacy-proxy" data-key="privacy.proxy" placeholder="http://host:port or socks5://host:port" />
+          <p class="hint">Leave empty to use system proxy settings.</p>
+        </div>
+        <div class="field">
+          <label for="privacy-doNotTrack">
+            <input type="checkbox" id="privacy-doNotTrack" data-key="privacy.doNotTrack" />
+            Send Do Not Track header
+          </label>
+        </div>
+        <div class="field">
+          <label for="privacy-persistentCookies">
+            <input type="checkbox" id="privacy-persistentCookies" data-key="privacy.persistentCookies" />
+            Persistent cookies (remember login across restarts)
+          </label>
+        </div>
+        <div class="field">
+          <label for="privacy-clearDataOnQuit">
+            <input type="checkbox" id="privacy-clearDataOnQuit" data-key="privacy.clearDataOnQuit" />
+            Clear all data on quit
+          </label>
+        </div>
+        <div class="field">
+          <label for="privacy-cacheSizeMB">Cache size limit (MB)</label>
+          <input type="number" id="privacy-cacheSizeMB" data-key="privacy.cacheSizeMB" min="50" max="5000" />
+        </div>
+      </section>
+
+      <!-- Notifications -->
+      <section id="sec-notifications" class="section">
+        <h3>Notifications &amp; Badges</h3>
+        <div class="field">
+          <label for="notifications-enabled">
+            <input type="checkbox" id="notifications-enabled" data-key="notifications.enabled" />
+            Allow desktop notifications
+          </label>
+        </div>
+        <div class="field">
+          <label for="notifications-dockBadge">
+            <input type="checkbox" id="notifications-dockBadge" data-key="notifications.dockBadge" />
+            Show dock badge (unread count)
+          </label>
+        </div>
+        <div class="field">
+          <label for="notifications-sound">
+            <input type="checkbox" id="notifications-sound" data-key="notifications.sound" />
+            Play notification sounds
+          </label>
+        </div>
+      </section>
+
+      <!-- Advanced -->
+      <section id="sec-advanced" class="section">
+        <h3>Advanced / Developer</h3>
+        <div class="field">
+          <label for="advanced-devToolsEnabled">
+            <input type="checkbox" id="advanced-devToolsEnabled" data-key="advanced.devToolsEnabled" />
+            Enable DevTools access
+          </label>
+        </div>
+        <div class="field">
+          <label for="advanced-customCSS">Custom CSS (injected into every pane)</label>
+          <textarea id="advanced-customCSS" data-key="advanced.customCSS" rows="5" placeholder="body { background: #000 !important; }"></textarea>
+        </div>
+        <div class="field">
+          <label for="advanced-customJS">Custom JavaScript (executed on page load)</label>
+          <textarea id="advanced-customJS" data-key="advanced.customJS" rows="5" placeholder="console.log('Tessera loaded');"></textarea>
+        </div>
+        <div class="field">
+          <label for="advanced-preloadScriptPath">Custom preload script path</label>
+          <input type="text" id="advanced-preloadScriptPath" data-key="advanced.preloadScriptPath" placeholder="/path/to/preload.js" />
+        </div>
+        <div class="field">
+          <label for="advanced-hardwareAcceleration">
+            <input type="checkbox" id="advanced-hardwareAcceleration" data-key="advanced.hardwareAcceleration" />
+            Hardware acceleration (requires restart)
+          </label>
+        </div>
+        <div class="field">
+          <label for="advanced-spellCheck">
+            <input type="checkbox" id="advanced-spellCheck" data-key="advanced.spellCheck" />
+            Spell check
+          </label>
+        </div>
+        <div class="field">
+          <label for="advanced-spellCheckLanguage">Spell check language</label>
+          <input type="text" id="advanced-spellCheckLanguage" data-key="advanced.spellCheckLanguage" placeholder="en-US" />
+        </div>
+      </section>
+
+      <!-- Profiles -->
+      <section id="sec-profiles" class="section">
+        <h3>Profiles</h3>
+        <p class="hint" style="margin-bottom:12px;">Profiles let you switch between different configurations (e.g., Work vs Personal). Each profile can have its own default URL, cookie partition, and custom CSS/JS.</p>
+        <div class="field">
+          <label for="profiles-active">Active profile</label>
+          <select id="profiles-active" data-key="profiles.active"></select>
+        </div>
+        <div id="profile-editor">
+          <div class="field">
+            <label for="profile-name">Profile name</label>
+            <input type="text" id="profile-name" />
+          </div>
+          <div class="field">
+            <label for="profile-defaultUrl">Profile default URL</label>
+            <input type="url" id="profile-defaultUrl" placeholder="Leave empty to use global default" />
+          </div>
+          <div class="field">
+            <label for="profile-cookiePartition">Cookie partition</label>
+            <input type="text" id="profile-cookiePartition" placeholder="persist:profile-name" />
+          </div>
+          <div class="field">
+            <label for="profile-inAppDomains">Profile in-app domains</label>
+            <textarea id="profile-inAppDomains" rows="3" placeholder="*.company.com"></textarea>
+          </div>
+          <div class="field">
+            <label for="profile-customCSS">Profile custom CSS</label>
+            <textarea id="profile-customCSS" rows="3"></textarea>
+          </div>
+          <div class="field">
+            <label for="profile-customJS">Profile custom JS</label>
+            <textarea id="profile-customJS" rows="3"></textarea>
+          </div>
+          <div class="field" style="display:flex; gap:8px;">
+            <button id="btn-save-profile" class="btn-primary">Save Profile</button>
+            <button id="btn-add-profile" class="btn-secondary">New Profile</button>
+            <button id="btn-delete-profile" class="btn-danger">Delete Profile</button>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+  <script src="settings.js"></script>
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tessera</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div id="toolbar">
+    <div id="toolbar-left">
+      <div id="traffic-light-spacer"></div>
+      <button id="btn-split-v" title="Split Vertical (⌘\)">
+        <svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.4">
+          <rect x="1" y="2" width="14" height="12" rx="2"/>
+          <line x1="8" y1="2" x2="8" y2="14"/>
+        </svg>
+        <span>Split V</span>
+      </button>
+      <button id="btn-split-h" title="Split Horizontal (⌘⇧\)">
+        <svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.4">
+          <rect x="1" y="2" width="14" height="12" rx="2"/>
+          <line x1="1" y1="8" x2="15" y2="8"/>
+        </svg>
+        <span>Split H</span>
+      </button>
+      <button id="btn-add-pane" title="Add Pane (⌘T)">
+        <svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8">
+          <line x1="8" y1="3" x2="8" y2="13"/>
+          <line x1="3" y1="8" x2="13" y2="8"/>
+        </svg>
+        <span>Add Pane</span>
+      </button>
+      <button id="btn-close-pane" title="Close Pane (⌘W)">
+        <svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.8">
+          <line x1="3" y1="3" x2="13" y2="13"/>
+          <line x1="13" y1="3" x2="3" y2="13"/>
+        </svg>
+        <span>Close</span>
+      </button>
+    </div>
+    <div id="toolbar-center">
+      <span id="app-title">Tessera</span>
+    </div>
+    <div id="toolbar-right">
+      <span id="pane-count">1 pane</span>
+      <button id="btn-settings" title="Settings (⌘,)">
+        <svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.4">
+          <circle cx="8" cy="8" r="2.5"/>
+          <path d="M8 1v2M8 13v2M1 8h2M13 8h2M3.05 3.05l1.41 1.41M11.54 11.54l1.41 1.41M3.05 12.95l1.41-1.41M11.54 4.46l1.41-1.41"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+  <div id="workspace"></div>
+  <script src="renderer.js"></script>
+</body>
+</html>

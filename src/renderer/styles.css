@@ -1,0 +1,298 @@
+/* Tessera — Main Window Styles */
+
+:root {
+  --accent: #2563eb;
+  --bg: #f3f4f6;
+  --toolbar-bg: #e5e7eb;
+  --text: #1f2937;
+  --text-muted: #6b7280;
+  --border: #d1d5db;
+  --pane-bg: #ffffff;
+  --resizer: #d1d5db;
+  --resizer-hover: var(--accent);
+  --header-bg: #f9fafb;
+  --url-bar-bg: #ffffff;
+  --url-bar-border: #d1d5db;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0f0f1a;
+    --toolbar-bg: #1a1a2e;
+    --text: #e5e7eb;
+    --text-muted: #9ca3af;
+    --border: #374151;
+    --pane-bg: #111827;
+    --resizer: #374151;
+    --header-bg: #1f2937;
+    --url-bar-bg: #1f2937;
+    --url-bar-border: #4b5563;
+  }
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  overflow: hidden;
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI', Roboto, sans-serif;
+  font-size: 13px;
+  background: var(--bg);
+  color: var(--text);
+  -webkit-app-region: no-drag;
+}
+
+/* ─── Toolbar ─────────────────────────────────────────────────────────── */
+
+#toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 38px;
+  padding: 0 12px;
+  background: var(--toolbar-bg);
+  border-bottom: 1px solid var(--border);
+  -webkit-app-region: drag;
+  user-select: none;
+}
+
+#toolbar-left, #toolbar-right {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  -webkit-app-region: no-drag;
+}
+
+#traffic-light-spacer {
+  width: 68px; /* space for macOS traffic lights */
+}
+
+#toolbar button {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 8px;
+  border: none;
+  border-radius: 6px;
+  background: transparent;
+  color: var(--text-muted);
+  font-size: 11px;
+  cursor: pointer;
+  transition: all 0.15s;
+  -webkit-app-region: no-drag;
+}
+
+#toolbar button:hover {
+  background: var(--border);
+  color: var(--text);
+}
+
+#toolbar button:active {
+  transform: scale(0.95);
+}
+
+#toolbar-center {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-muted);
+  pointer-events: none;
+}
+
+#pane-count {
+  font-size: 11px;
+  color: var(--text-muted);
+  margin-right: 8px;
+}
+
+/* ─── Workspace ───────────────────────────────────────────────────────── */
+
+#workspace {
+  flex: 1;
+  display: flex;
+  height: calc(100vh - 38px);
+  overflow: hidden;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+}
+
+/* ─── Pane ────────────────────────────────────────────────────────────── */
+
+.pane {
+  display: flex;
+  flex-direction: column;
+  border: 2px solid transparent;
+  border-radius: 4px;
+  overflow: hidden;
+  transition: border-color 0.2s;
+  background: var(--pane-bg);
+}
+
+.pane.active {
+  border-color: var(--accent);
+}
+
+.pane-header {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 8px;
+  background: var(--header-bg);
+  border-bottom: 1px solid var(--border);
+  min-height: 32px;
+}
+
+.pane-header.hidden {
+  display: none;
+}
+
+.pane-header.hover-only {
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.pane:hover .pane-header.hover-only {
+  opacity: 1;
+}
+
+.pane-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border: none;
+  border-radius: 4px;
+  background: transparent;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.pane-btn:hover {
+  background: var(--border);
+  color: var(--text);
+}
+
+.pane-btn:disabled {
+  opacity: 0.3;
+  cursor: default;
+}
+
+.pane-url-bar {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  margin: 0 6px;
+}
+
+.pane-url-bar input {
+  width: 100%;
+  padding: 3px 8px;
+  border: 1px solid var(--url-bar-border);
+  border-radius: 6px;
+  background: var(--url-bar-bg);
+  color: var(--text);
+  font-size: 11px;
+  font-family: 'SF Mono', 'Fira Code', monospace;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.pane-url-bar input:focus {
+  border-color: var(--accent);
+}
+
+.pane-title {
+  flex: 1;
+  font-size: 11px;
+  color: var(--text-muted);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  margin: 0 6px;
+}
+
+.pane-body {
+  flex: 1;
+  display: flex;
+  overflow: hidden;
+}
+
+.pane-body webview {
+  flex: 1;
+  width: 100%;
+  height: 100%;
+}
+
+/* ─── Split containers ────────────────────────────────────────────────── */
+
+.split {
+  display: flex;
+  overflow: hidden;
+}
+
+.split.row {
+  flex-direction: row;
+}
+
+.split.col {
+  flex-direction: column;
+}
+
+/* ─── Resizers ────────────────────────────────────────────────────────── */
+
+.resizer {
+  flex-shrink: 0;
+  background: var(--resizer);
+  transition: background 0.2s;
+  z-index: 10;
+}
+
+.resizer.row {
+  width: 4px;
+  cursor: col-resize;
+}
+
+.resizer.col {
+  height: 4px;
+  cursor: row-resize;
+}
+
+.resizer.thin.row { width: 2px; }
+.resizer.thin.col { height: 2px; }
+.resizer.thick.row { width: 8px; }
+.resizer.thick.col { height: 8px; }
+
+.resizer:hover, .resizer.dragging {
+  background: var(--resizer-hover);
+}
+
+/* ─── Scrollbar ───────────────────────────────────────────────────────── */
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-muted);
+}
