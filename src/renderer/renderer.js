@@ -276,7 +276,11 @@ function updateStatus() {
 function render() {
   workspace.innerHTML = '';
   if (!root) return;
-  workspace.appendChild(renderNode(root));
+  const el = renderNode(root);
+  el.style.flex = '1 1 0';
+  el.style.minWidth = '0';
+  el.style.minHeight = '0';
+  workspace.appendChild(el);
   updateStatus();
 }
 
@@ -318,6 +322,11 @@ function attachResizer(resizer, splitNode, index, container) {
     const startB = splitNode.sizes[index + 1];
     const startAB = startA + startB;
 
+    // Add overlay to prevent webview from capturing mouse events
+    const overlay = document.createElement('div');
+    overlay.className = `resize-overlay ${splitNode.dir === 'row' ? 'row' : 'col'}`;
+    document.body.appendChild(overlay);
+
     function onMove(ev) {
       const delta = (isRow ? ev.clientX : ev.clientY) - startPos;
       const abShareSize = (startAB / sumFlex) * totalSize;
@@ -338,6 +347,7 @@ function attachResizer(resizer, splitNode, index, container) {
     }
     function onUp() {
       resizer.classList.remove('dragging');
+      overlay.remove();
       document.removeEventListener('mousemove', onMove);
       document.removeEventListener('mouseup', onUp);
     }
