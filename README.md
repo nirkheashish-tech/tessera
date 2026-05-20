@@ -47,15 +47,31 @@ Think of it as a tiling window manager — but for web apps, inside a single win
 
 ### macOS
 
+#### Quick Install (recommended)
+
+Run this one-liner in Terminal to download, install, and clear quarantine automatically:
+
+```bash
+curl -sL https://raw.githubusercontent.com/nirkheashish-tech/tessera/main/install.sh | bash
+```
+
+#### Manual Install
+
 1. Download the appropriate build from [Releases](../../releases):
    - **Apple Silicon** (M1/M2/M3/M4): `Tessera-x.x.x-macOS-AppleSilicon.zip`
    - **Intel**: `Tessera-x.x.x-macOS-Intel.zip`
 2. Extract and drag `Tessera.app` to `/Applications`.
-3. First launch: right-click → **Open** → click **Open** in the dialog.
-4. If macOS says "damaged", run:
+3. **⚠️ IMPORTANT — Required first-launch step:**
+   
+   macOS will say the app is "damaged" because it isn't signed with an Apple Developer certificate ($99/year). This is normal for open-source apps distributed outside the App Store. Run this in Terminal:
+   
    ```bash
    xattr -cr /Applications/Tessera.app
    ```
+   
+   Then open the app normally. **You only need to do this once.**
+
+> **Why does this happen?** Apple's Gatekeeper adds a quarantine flag to all files downloaded from the internet. Without a paid Apple Developer certificate, unsigned apps trigger a "damaged" warning. The `xattr -cr` command removes this flag. The app is not actually damaged — this is a security policy, not a bug.
 
 ### Linux
 
