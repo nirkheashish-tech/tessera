@@ -90,7 +90,7 @@ curl -sL https://raw.githubusercontent.com/nirkheashish-tech/tessera/main/instal
 Windows builds require Wine for cross-compilation. To build from source on Windows:
 
 ```bash
-git clone https://github.com/AshishSardana/tessera.git
+git clone https://github.com/nirkheashish-tech/tessera.git
 cd tessera
 npm install
 npm run dist:win
@@ -153,7 +153,7 @@ All shortcuts are customizable in Settings → Shortcuts.
 
 ```bash
 # Clone the repo
-git clone https://github.com/AshishSardana/tessera.git
+git clone https://github.com/nirkheashish-tech/tessera.git
 cd tessera
 
 # Install dependencies
