@@ -7,7 +7,9 @@
 <p align="center">
   <strong>A powerful, open-source multi-pane web app wrapper.</strong><br>
   Run multiple instances of any web app side-by-side in one window.
-  ![Tessera in action](assets/TesseraPanes.png)
+  <p align="center">
+  <img src="assets/TesseraPanes.png" alt="Tessera in action" >
+</p>
 </p>
 
 <p align="center">
